@@ -49,39 +49,38 @@ class Owner
     @@all 
   end
 
-def walk_dogs
+  def walk_dogs
 
-  Dog.all.each do |dogs|
-    dogs.mood = "happy"
+    Dog.all.each do |dogs|
+      dogs.mood = "happy"
+    end
+  end 
+  def feed_cats
+
+    Cat.all.each do |cats|
+      cats.mood = "happy"
+    end
+  end 
+
+  def sell_cats
+    Cat.all.map do |cats|
+      cats.mood = "nervous"
+      cats.owner = nil
+    end
   end
-end 
-def feed_cats
 
-  Cat.all.each do |cats|
-    cats.mood = "happy"
+  def sell_dogs 
+    Dog.all.each do |dogs|
+      dogs.mood = "nervous"
+      dogs.owner = nil
+    end
   end
-end 
 
-def sell_cats
-   Cat.all.map do |cats|
-    cats.mood = "nervous"
-    cats.owner = nil
-   end
-end
-
-def sell_dogs 
-  Dog.all.each do |dogs|
-    dogs.mood = "nervous"
-    dogs.owner = nil
+  def sell_pets 
+    self.sell_dogs && self.sell_cats 
+    @@all = []
   end
-end
-
-def sell_pets 
-  self.sell_dogs && self.sell_cats 
-  @@all = []
-end
- def list_pets 
-  "I have #{self.dogs.length} dog(s), and #{self.cats.length} cat(s)."
- end 
-
+  def list_pets 
+    "I have #{self.dogs.length} dog(s), and #{self.cats.length} cat(s)."
+  end 
 end 
